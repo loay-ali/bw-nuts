@@ -8,8 +8,38 @@ class BW_NUTS {
 
         //Disable Emojies Scripts ( Performance Sake )
         add_action('init',array($this,'cancel_emoji'));
+    
+        //Update Through GitHub Repo
+        add_filter('pre_set_site_transient_update_themes', array($this,'updating_theme'), 100, 1);
     }
 
+    function updating_theme($data) {
+      // Theme information
+      $theme   = get_stylesheet();
+      $current = wp_get_theme()->get('Version');
+        
+      $user = 'loay-ali';
+      $repo = 'bw-nuts';
+        
+      $file = @json_decode(@file_get_contents('https://api.github.com/repos/'.$user.'/'.$repo.'/releases/latest', false,
+          stream_context_create(['http' => ['header' => "User-Agent: ".$user."\r\n"]])
+      ));
+        
+      if($file) {
+    	$update = filter_var($file->tag_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+          
+        if($update > $current) {
+      	  $data->response[$theme] = array(
+    	      'theme'       => $theme,
+    	      'new_version' => $update,
+    	      'url'         => 'https://github.com/'.$user.'/'.$repo,
+    	      'package'     => $file->assets[0]->browser_download_url,
+          );
+        }
+      }
+      return $data;
+    }
+    
     function cancel_emoji() {
         remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
         remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );

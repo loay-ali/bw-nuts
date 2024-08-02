@@ -1,0 +1,14 @@
+{
+  "name": "bw-nut",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "loay ali",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-cli": "^3.0.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "hp/bw-nut",
+    "authors": [
+        {
+            "name": "loay ali",
+            "email": "loay.ali.emam.ghonem@gmail.com"
+        }
+    ],
+    "scripts": {
+        "update-style": "sass assets/css/style.scss style.css --style=compressed && sass assets/css/rtl.scss rtl.css --style=compressed"
+    },
+    "require": {}
+}

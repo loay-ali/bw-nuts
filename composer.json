@@ -7,7 +7,7 @@
         }
     ],
     "scripts": {
-        "update-style": "sass assets/css/style.scss style.css --style=compressed && sass assets/css/rtl.scss rtl.css --style=compressed"
+        "update-style": "sass assets/css/style.scss style.css --style=compressed && sass assets/css/rtl.scss rtl.css --style=compressed && sass assets/css/woocommerce/wc.scss assets/css/woocommerce/wc.css --style=compressed"
     },
     "require": {}
 }
